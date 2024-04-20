@@ -1,0 +1,17 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemingProvider @rendermode="InteractiveServer" />
+<MudPopoverProvider @rendermode="InteractiveServer" />
+<MudDialogProvider @rendermode="InteractiveServer" />
+<MudSnackbarProvider @rendermode="InteractiveServer" />
+
+<MudLayout Class="d-flex flex-column">
+    <MudAppBar Elevation="0">
+        <MudText Typo="Typo.h5">PURCHASE</MudText>
+        <MudButton Class="mx-3" Variant="Variant.Outlined" Color="Color.Secondary" DisableElevation="true">PROPOSAL</MudButton>
+    </MudAppBar>
+
+    <MudMainContent Class="d-flex flex-grow-1 flex-column">
+        @Body
+    </MudMainContent>    
+</MudLayout>
