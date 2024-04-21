@@ -1,8 +1,13 @@
-﻿@page "/"
+﻿@using Repositories;
+@using Models;
+
+@page "/"
+
+@inject ISupplierRepository supplierRepository;
 
 <PageTitle>Blazerp | Purchase</PageTitle>
 
-<MudStack Row="true" Class="ma-3">
+<MudStack Row="true" Class="ma-2">
     <MudMenu AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft" Label="File">
         <MudMenuItem IconSize="Size.Small" Icon="@Icons.Material.Outlined.Refresh">Refresh</MudMenuItem>
         <MudDivider />
@@ -22,9 +27,9 @@
 <MudDivider Class="flex-grow-0" />
 
 <div class="d-flex flex-grow-1 flex-row">
-    <!-- Search -->
-    <div class="d-flex flex-column" style="width: 512px;">
-        <MudStack Class="pa-6 flex-grow-1">
+    <!-- Left - Search -->
+    <div class="d-flex flex-column align-stretch" style="width: 512px; min-height: 0;">
+        <MudStack Class="pa-4">
             <MudText Typo="Typo.h5" Class="mb-1">Search</MudText>
 
             <MudGrid Spacing="2">
@@ -40,41 +45,48 @@
             </MudGrid>
         </MudStack>
 
-        <MudText Typo="Typo.h5" Class="mb-1 ps-6 flex-grow-1">Suppliers</MudText>
+        <MudText Typo="Typo.h5" Class="mb-1 ps-4">Suppliers</MudText>
              
-        <MudDataGrid Elevation="0" Class="flex-grow-1 overflow-auto" Style="min-height: 0;" Items="@SupplierNames">
-            <Columns>
-                <PropertyColumn Property="x => x" Title="Name" />
-            </Columns>
-        </MudDataGrid>
+        <MudTable Elevation="0" Items="@Suppliers" FixedHeader="true" Style="height: 100px; width: 100%;" Class="d-flex flex-grow-1">
+            <ColGroup>
+                <col style="width: 10%;" />
+                <col style="width: 128px;" />
+                <col style="width: 10%;" />
+            </ColGroup>
+            <HeaderContent>
+                <MudTh>VAT</MudTh>
+                <MudTh>Name</MudTh>
+                <MudTh>Balance</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="VAT">@context.VatNumber</MudTd>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Balance" Style="text-align:right">@context.Balance.ToString("N2")</MudTd>
+            </RowTemplate>
+        </MudTable>
     </div>
 
     <!-- Divider -->
     <MudDivider Vertical="true" Class="flex-grow-0" />
 
-    <!-- Content -->
+    <!-- Right - Content -->
     <div class="flex-grow-1">
-        <MudText Align="Align.Center" Class="ma-16">Content</MudText>
+        <MudText Align="Align.Center" Class="ma-16 flex-grow-1">Content</MudText>
     </div>
 
 </div>
 
-<footer class="flex-grow-1">
+<footer>
     <MudDivider />
 
     <MudText>Footer</MudText>
 </footer>
 
 @code {
-    private List<string> SupplierNames = [];
+    private List<Supplier> Suppliers = [];
 
     protected override async Task OnInitializedAsync()
     {
-        for(int i = 0; i < 100; i++)
-        {
-            SupplierNames.Add($"Supplier #{i}");
-        }
-
-        await base.OnInitializedAsync();
+        Suppliers = await supplierRepository.Search();
     }
 }

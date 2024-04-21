@@ -1,0 +1,38 @@
+﻿@page "/debug"
+
+<PageTitle>Blazerp | Debug</PageTitle>
+
+<header style="background: red;"> 
+    <p>Header</p>
+</header>
+
+<main class="d-flex flex-grow-1" style="background: yellow;">
+    <div class="d-flex flex-column" style="background: white; width: 512px;">
+        <div class="pa-6">
+            <p>Search</p>
+            <p>Search</p>
+            <p>Search</p>
+            <p>Search</p>
+            <p>Search</p>
+            <p>Search</p>
+        </div>
+
+        <div class="pa-6 flex-grow-1 overflow-y-scroll" style="background: gold; height: 100px;">
+            @for(int i = 0; i < 100; i++) {
+                <p>Test #@i</p>
+            }
+        </div>
+    </div>
+
+    <div style="background: green;">
+        <p>Div 2</p>
+    </div>
+
+    <div class="flex-grow-1" style="background: gray;">
+        <p>Div 3</p>
+    </div>
+</main>
+
+<footer style="background: orange;">
+    <p>Footer</p>
+</footer>

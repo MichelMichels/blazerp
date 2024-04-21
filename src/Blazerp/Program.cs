@@ -1,10 +1,12 @@
 using Blazerp.Components;
+using Blazerp.Repositories;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
+    .AddSingleton<ISupplierRepository, SupplierRepository>()
     .AddMudServices()
     .AddRazorComponents()
     .AddInteractiveServerComponents();
