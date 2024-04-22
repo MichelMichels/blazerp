@@ -5,7 +5,7 @@ namespace Blazerp.Repositories;
 public class SupplierRepository : ISupplierRepository
 {
     private readonly Random random = new Random();
-    private readonly string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZ0123456789 ";
+    private readonly string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZ0123456789       ";
 
     public async Task<List<Supplier>> Search()
     {

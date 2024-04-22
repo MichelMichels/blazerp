@@ -29,29 +29,25 @@
 <div class="d-flex flex-grow-1 flex-row">
     <!-- Left - Search -->
     <div class="d-flex flex-column align-stretch" style="width: 512px; min-height: 0;">
-        <MudStack Class="pa-4">
-            <MudText Typo="Typo.h5" Class="mb-1">Search</MudText>
 
+        <MudText Typo="Typo.h5" Class="mb-1 pa-4">Suppliers</MudText>
+
+        <MudStack Class="px-4">
             <MudGrid Spacing="2">
-                <MudItem xs="12" md="6">
-                    <MudTextField Margin="Margin.Dense" Variant="Variant.Filled" Label="VAT number" T="string"></MudTextField>
-                </MudItem>
-                <MudItem xs="12" md="6">
-                    <MudTextField Margin="Margin.Dense" Variant="Variant.Filled" Label="Supplier name" T="string"></MudTextField>
+                <MudItem xs="12">
+                    <MudTextField Margin="Margin.Dense" Variant="Variant.Filled" Label="Filter" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.FilterList" T="string"></MudTextField>
                 </MudItem>
                 <MudItem xs="12" md="6">
                     <MudTextField Margin="Margin.Dense" Variant="Variant.Filled" Label="Limit" T="int" Value="100" InputMode="InputMode.numeric"></MudTextField>
                 </MudItem>
             </MudGrid>
         </MudStack>
-
-        <MudText Typo="Typo.h5" Class="mb-1 ps-4">Suppliers</MudText>
              
-        <MudTable Elevation="0" Items="@Suppliers" FixedHeader="true" Style="height: 100px; width: 100%;" Class="d-flex flex-grow-1">
+        <MudTable Dense="true" Elevation="0" Items="@Suppliers" FixedHeader="true" Style="height: 100px;" Virtualize="true" Class="d-flex flex-grow-1">
             <ColGroup>
-                <col style="width: 10%;" />
-                <col style="width: 128px;" />
-                <col style="width: 10%;" />
+                <col style="width: 20%;" />
+                <col style="width: 60%;" />
+                <col style="width: 20%;" />
             </ColGroup>
             <HeaderContent>
                 <MudTh>VAT</MudTh>
@@ -60,7 +56,7 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="VAT">@context.VatNumber</MudTd>
-                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Name" Style="overflow-wrap:break-word;max-width:200px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">@context.Name</MudTd>
                 <MudTd DataLabel="Balance" Style="text-align:right">@context.Balance.ToString("N2")</MudTd>
             </RowTemplate>
         </MudTable>
